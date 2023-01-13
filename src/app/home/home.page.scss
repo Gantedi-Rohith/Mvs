@@ -1,0 +1,48 @@
+#expertise {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  #skillVal {
+    display: none;
+  }
+}
+ion-content {
+  --background: black !important;
+}
+
+.skillCard:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: all ease 1s;
+  box-shadow: 6px 0px 22px 4px #cacaca;
+
+  #expertise {
+    .prog {
+      --background: rgba(0, 255, 0, 0.1);
+      --progress-background: green;
+    }
+    #skillVal {
+      display: block;
+    }
+  }
+}
+.heading {
+  color: white;
+  text-align: center;
+}
+.Avatar {
+  margin-top: 36%;
+  border-radius: 50%;
+  width: 40%;
+  height: 22%;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn ion-button {
+  margin-top: 10%;
+  height: 46px;
+  width: 160px;
+}
