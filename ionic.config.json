@@ -1,0 +1,7 @@
+{
+  "name": "MvS",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
