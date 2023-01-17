@@ -18,6 +18,7 @@ export class FolderPage implements OnInit {
   changeIcon = 'eye';
   showPass = 'password';
   resData: any;
+  email: any;
   constructor(
     private activatedRoute: ActivatedRoute,
     private menuCtrl: MenuController,
@@ -40,18 +41,26 @@ export class FolderPage implements OnInit {
     }
   }
   register() {
-    if (this.newUser && this.newPass && this.newMob && this.confirmPass) {
+    if (
+      this.newUser &&
+      this.newPass &&
+      this.newMob &&
+      this.confirmPass &&
+      this.email
+    ) {
       if (this.newPass == this.confirmPass) {
-        this.serv.newRegister(this.newUser, this.confirmPass, this.newMob).then(
-          (res) => {
-            this.resData = res;
-            this.help.presentToast(this.resData.message);
-            this.modalCtrl.dismiss();
-          },
-          (err) => {
-            this.help.presentToast(err.error.message);
-          }
-        );
+        this.serv
+          .newRegister(this.newUser, this.confirmPass, this.newMob, this.email)
+          .then(
+            (res) => {
+              this.resData = res;
+              this.help.presentToast(this.resData.message);
+              this.modalCtrl.dismiss();
+            },
+            (err) => {
+              this.help.presentToast(err.error.message);
+            }
+          );
       } else {
         this.help.presentToast('Passwords Dosent Match');
       }

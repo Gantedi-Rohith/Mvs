@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <span slot="start" id="close" (click)="closeModal()"
+      ><ion-icon name="close"></ion-icon
+    ></span>
+    <ion-title>OTP Verification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item mode="md">
+      <ion-label position="floating">Enter OTP</ion-label>
+      <ion-input placeholder="Enter OTP" [(ngModel)]="otp"></ion-input>
+    </ion-item>
+    <span class="btn" mode="md">
+      <ion-button (click)="changePassword()">Proceed</ion-button>
+    </span>
+  </ion-card>
+</ion-content>

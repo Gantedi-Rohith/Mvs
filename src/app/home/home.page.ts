@@ -3,11 +3,13 @@ import {
   AlertController,
   MenuController,
   ModalController,
+  PopoverController,
 } from '@ionic/angular';
 import { ApiService } from '../api.service';
 import { AppComponent } from '../app.component';
 import { FolderPage } from '../folder/folder.page';
 import { HelperService } from '../helper.service';
+import { PrecoveryPage } from '../precovery/precovery.page';
 
 @Component({
   selector: 'app-home',
@@ -17,27 +19,28 @@ import { HelperService } from '../helper.service';
 export class HomePage {
   skillInfo: any;
   skills: any = [];
-  skillExpertise: any = [];
   mainArray: any = [];
   Username: any;
   Password: any;
   resData: any;
+  skill: any = [];
   constructor(
     private serv: ApiService,
     private menuCtrl: MenuController,
     private help: HelperService,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private popoverCtrl: PopoverController
   ) {}
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
     this.serv.getSkills().then((res) => {
       this.skillInfo = res;
-      this.skills = this.skillInfo.skillName;
-      this.skillExpertise = this.skillInfo.skillLevel;
+      this.skills = this.skillInfo.skills;
+      this.skill = [];
       var i = 0;
-      this.skills.forEach((ele: any) => {
-        this.mainArray.push({ Name: ele, Value: this.skillExpertise[i] / 100 });
+      Object.entries(this.skills).forEach(([key, value]: any) => {
+        this.skill.push({ Name: key, Value: value / 100 });
         i++;
       });
     });
@@ -50,8 +53,6 @@ export class HomePage {
           this.help.presentToast(this.resData.message);
         },
         (err) => {
-          console.log(err);
-
           this.help.presentToast(err.error.message);
           if (err.error.message == 'User not Found') {
             this.getAlert();
@@ -71,14 +72,11 @@ export class HomePage {
           {
             text: 'No',
             role: 'No',
-            handler: () => {
-              console.log('No clicked');
-            },
+            handler: () => {},
           },
           {
             text: 'Yes',
             handler: () => {
-              console.log('Buy clicked');
               this.openRegistration();
             },
           },
@@ -94,6 +92,16 @@ export class HomePage {
   openRegistration() {
     this.modalCtrl
       .create({ component: FolderPage, showBackdrop: false })
+      .then((res) => {
+        res.present();
+      });
+  }
+  passwordRecovery() {
+    this.modalCtrl
+      .create({
+        component: PrecoveryPage,
+        componentProps: { Username: this.Username },
+      })
       .then((res) => {
         res.present();
       });

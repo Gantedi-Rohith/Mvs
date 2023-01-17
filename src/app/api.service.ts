@@ -38,12 +38,13 @@ export class ApiService {
     });
   }
 
-  newRegister(User: any, Pass: any, Mob: number) {
+  newRegister(User: any, Pass: any, Mob: number, mail: any) {
     return new Promise((resolve, reject) => {
       let reqParams = JSON.stringify({
         Username: User,
         Password: Pass,
         MobileNo: Mob,
+        Email: mail,
       });
       this.http.post('https://grohith.in/register.php', reqParams).subscribe(
         (res) => {
@@ -53,6 +54,42 @@ export class ApiService {
           reject(err);
         }
       );
+    });
+  }
+
+  sendOTP(User: any) {
+    return new Promise((resolve, reject) => {
+      let reqParams = JSON.stringify({
+        Username: User,
+      });
+      this.http.post('https://grohith.in/otpService.php', reqParams).subscribe(
+        (res) => {
+          resolve(res);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
+    });
+  }
+
+  passwordRecovery(User: any, Pass: any, Status: number) {
+    return new Promise((resolve, reject) => {
+      let reqParams = JSON.stringify({
+        Username: User,
+        Password: Pass,
+        verifyStatus: Status,
+      });
+      this.http
+        .post('https://grohith.in/passwordRecovery.php', reqParams)
+        .subscribe(
+          (res) => {
+            resolve(res);
+          },
+          (err) => {
+            reject(err);
+          }
+        );
     });
   }
 }

@@ -2,17 +2,17 @@
   <span style="display: flex; align-items: center; justify-content: center">
     <img class="Avatar" src="/assets/images/Amoled_ava.png" alt="" />
   </span>
-  <!-- <ion-card class="skillCard" *ngFor="let Name of mainArray">
+  <!-- <ion-card class="skillCard" *ngFor="let item of skill">
     <ion-row>
       <ion-col size="4">
-        <ion-item lines="none"><strong>{{Name.Name}}</strong></ion-item>
+        <ion-item lines="none"><strong>{{item.Name}}</strong></ion-item>
       </ion-col>
       <ion-col size="8" id="expertise">
         <ion-progress-bar
           class="prog"
-          value="{{Name.Value}}"
+          value="{{item.Value}}"
         ></ion-progress-bar>
-        <span id="skillVal">{{Name.Value*100}}%</span>
+        <span id="skillVal">{{item.Value*100}}%</span>
       </ion-col>
     </ion-row>
   </ion-card> -->
@@ -34,6 +34,7 @@
       ></ion-input>
     </ion-item>
   </ion-card>
+  <p class="forgot" (click)="passwordRecovery()">Forgot Password?</p>
   <span class="btn">
     <ion-button (click)="Login()">Proceed</ion-button>
   </span>
