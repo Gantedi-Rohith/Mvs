@@ -17,6 +17,7 @@ export class PrecoveryPage implements OnInit {
   showPass: string | undefined;
   newPass: string | undefined;
   confirmPass: string | undefined;
+  verifyStatus = 'Locked';
   constructor(
     private popOver: PopoverController,
     private modalCtrl: ModalController,
@@ -54,8 +55,9 @@ export class PrecoveryPage implements OnInit {
         this.confirmPass &&
         this.newPass == this.confirmPass
       ) {
+        this.verifyStatus = 'Unlocked';
         this.serv
-          .passwordRecovery(this.Username, this.newPass, this.recoveryStatus)
+          .passwordRecovery(this.Username, this.newPass, this.verifyStatus)
           .then(
             (res) => {
               this.resData = res;

@@ -73,7 +73,7 @@ export class ApiService {
     });
   }
 
-  passwordRecovery(User: any, Pass: any, Status: number) {
+  passwordRecovery(User: any, Pass: any, Status: string) {
     return new Promise((resolve, reject) => {
       let reqParams = JSON.stringify({
         Username: User,
